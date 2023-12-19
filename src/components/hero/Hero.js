@@ -40,6 +40,9 @@ const Hero = () => {
     navigate(`/${process.env.REACT_APP_PATHCODE}/adminLogin`);
   };
 
+  const handlePortfolioVisit = () => {
+    window.location.href = "https://portfolio-main-sage.vercel.app/";
+  };
 
   return (
     <section className="bg-primary text-black py-16">
@@ -90,19 +93,13 @@ const Hero = () => {
               this exciting academic pursuit.
             </p>
 
-            <a
-              href="https://portfolio-main-sage.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={handlePortfolioVisit}
+              className="bg-blue-800 text-white px-4 py-2 rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-blue-600 duration-300 mt-4 mx-auto md:mx-0"
             >
-              <button
-                className="bg-blue-800 text-white px-4 py-2 rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-blue-600 duration-300 mt-4"
-              >
-                Visit My Portfolio
-              </button>
-            </a>
+              Visit My Portfolio
+            </button>
 
-           
             <div>{/* <HelpField/> */}</div>
           </div>
         </div>
