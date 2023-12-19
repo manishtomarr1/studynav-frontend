@@ -17,7 +17,6 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-
 export default function BookSlot() {
   const [showForm, setShowForm] = React.useState(false); // State to control form visibility
   const [slots, setSlots] = React.useState([]); // State to store slots fetched from backend
@@ -29,7 +28,7 @@ export default function BookSlot() {
 
   const fetchSlots = async () => {
     try {
-      const response = await axios.get("/fatchSlot"); 
+      const response = await axios.get("/fatchSlot");
       const slotData = response.data; // Use response.data directly
       // console.log(response[0].data.booked)
       setSlots(slotData);
@@ -95,6 +94,7 @@ export default function BookSlot() {
                   {new Date(slot.date).toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
+                    hour12: true, // Display in 12-hour format
                   })}
                   <br />
                   {/* Your Local Time:{" "}
