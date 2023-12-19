@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaCalendarAlt, FaCheckCircle, FaEnvelope } from "react-icons/fa";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import { useNavigate } from 'react-router-dom';
 // import { RxDotFilled } from "react-icons/rx";
 import picture from "./assets/pic.JPG";
 import HelpField from "../home/HelpField/HelpField";
@@ -34,6 +35,10 @@ const Hero = () => {
   function goToSlide(slideIndex) {
     setIndex(slideIndex);
   }
+  const navigate = useNavigate();
+  const handleAdminLogin = () => {
+    navigate(`/${process.env.REACT_APP_PATHCODE}/adminLogin`);
+  };
   return (
     <section className="bg-primary text-black py-16">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-center">
@@ -46,17 +51,20 @@ const Hero = () => {
               <p className="text-2xl font-bold mb-4 ">Who I Am?</p>
             </div>
             <p className="text-lg text-justify">
-              Greetings! I'm Manish Tomar from India, and I'm on a journey to
-              further enhance my passion for software engineering. With
-              experience as a Software Development Engineer at MoonDive in
-              India, I'm excited to embark on a new chapter in my academic
-              pursuit. I hold a postgraduate degree in Computer Applications
-              with Honors from Madan Mohan Malaviya University of Technology,
-              Gorakhpur, U.P, India, and a bachelor's degree from Dewan VS
-              Institute of Engineering and Technology, Meerut, U.P, India.
-              Currently, I'm thrilled to be pursuing my Master's in Software
-              Engineering from Cardiff University in the UK.
-            </p>
+            Greetings! I'm Manish Tomar from India, and I'm on a journey to
+            further enhance my passion for software engineering. With
+            experience as a Software Development Engineer at MoonDive in
+            India, I'm excited to embark on a new chapter in my academic
+            pursuit. I hold a postgraduate degree in Computer Applications
+            with Honors from Madan Mohan Malaviya University of Technology,
+            Gorakhpur, U.P, India, and a bachelor's degree from Dewan VS
+            Institute of Engineering and Technology, Meerut, U.P, India.
+            Currently, I'm thrilled to be pursuing my Master's in Software
+            Engineering from Cardiff University in the UK.
+          </p>
+          <button onClick={handleAdminLogin} className="bg-blue-800 text-white px-4 py-2 rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-blue-600 duration-300 mt-4">
+            Admin Login
+          </button>
           </div>
         </div>
       </div>
