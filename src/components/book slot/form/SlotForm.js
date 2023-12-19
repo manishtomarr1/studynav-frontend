@@ -6,6 +6,7 @@ import { useForm, ValidationError } from "@formspree/react";
 function SlotForm(props) {
   const [studentName, setStudentName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
+  const [studentCountry, setStudentCountry] = useState("");
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -100,6 +101,18 @@ function SlotForm(props) {
             required
           />
           <ValidationError prefix="Email" field="email" errors={state.errors} />
+
+          <label htmlFor="country" className="block mt-4 mb-2 font-medium">
+            Country
+          </label>
+          <input
+            id="country"
+            name="country"
+            className="w-full px-3 py-2 border rounded"
+            value={studentCountry} // Bind the input value to the state
+            onChange={(e) => setStudentCountry(e.target.value)} // Update state on input change
+            required
+          />
 
           <label className="block mt-4 mb-2 font-medium">Gender</label>
           <div className="flex items-center space-x-4">

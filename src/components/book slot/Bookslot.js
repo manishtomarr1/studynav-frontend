@@ -97,11 +97,12 @@ export default function BookSlot() {
                     minute: "2-digit",
                   })}
                   <br />
-                  Your Local Time:{" "}
+                  {/* Your Local Time:{" "}
                   {new Date(slot.date).toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
-                  })}
+                  })} */}
+                  <p className="font-bold">time is according to the UK</p>
                 </div>
 
                 <Badge.Ribbon
