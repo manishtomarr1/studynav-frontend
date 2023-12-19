@@ -15,10 +15,10 @@ function SlotForm(props) {
   const updateStudentName = async (e) => {
     const eventId = props.slotId;
     try {
-      const response = await axios.put(
-        `/updateNameInSlot?eventId=${eventId}`,
-        { name: studentName, email: studentEmail }
-      );
+      const response = await axios.put(`/updateNameInSlot?eventId=${eventId}`, {
+        name: studentName,
+        email: studentEmail,
+      });
 
       if (response.status === 200) {
         console.log("Student name added successfully");
@@ -41,9 +41,7 @@ function SlotForm(props) {
 
     // Make the PUT request to update the booked status using Axios
     try {
-      const response = await axios.put(
-        `/updateSlot?eventId=${eventId}`
-      );
+      const response = await axios.put(`/updateSlot?eventId=${eventId}`);
 
       if (response.status === 200) {
         console.log("Slot booked successfully");
@@ -225,6 +223,12 @@ function SlotForm(props) {
             field="doubtsQuestion"
             errors={state.errors}
           />
+          <p className="text-gray-600 text-sm mt-2">
+            <span className="font-bold text-blue-500">Note:</span> Please book
+            the slot if you genuinely have some doubts, seek guidance, and want
+            to know more about studying in the UK. This service is free of cost,
+            and i encourage needy students to take advantage of it.
+          </p>
 
           <button
             type="submit"
