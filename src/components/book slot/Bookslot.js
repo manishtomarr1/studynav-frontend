@@ -135,7 +135,7 @@ export default function BookSlot() {
                   disabled={slot.booked || slot.pending}
                   className="w-24 bg-gray-800 text-white px-4 py-2 rounded transition ease-in-out delay-15 hover:-translate-y-1 hover:scale-110 hover:bg-gray-600 duration-300"
                 >
-                  {slot.pending ? "Pending" : slot.booked ? "Booked" : "Choose the Slot"}
+                  {slot.pending ? "Pending" : slot.booked ? "Booked" : "Select"}
                 </button>
               </Item>
             </Grid>
