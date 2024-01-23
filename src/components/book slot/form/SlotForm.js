@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { REACT_APP_API_BASE_URL } from "../../../config";
+// import { REACT_APP_API_BASE_URL } from "../../../config";
 import { useForm, ValidationError } from "@formspree/react";
 // import { FaInstagramSquare } from "react-icons/fa";
 
@@ -81,7 +81,7 @@ function SlotForm(props) {
   const sendVerificationEmail = async () => {
     try {
       const response = await axios.post(
-        `${REACT_APP_API_BASE_URL}/sendVerificationEmail`,
+        `/sendVerificationEmail`,
         {
           email: studentEmail,
         }
@@ -124,7 +124,7 @@ function SlotForm(props) {
 
   const verifyOtp = async () => {
     try {
-      const response = await axios.post(`${REACT_APP_API_BASE_URL}/verifyOtp`, {
+      const response = await axios.post(`/verifyOtp`, {
         email: studentEmail,
         otp: otp,
       });
@@ -175,7 +175,7 @@ function SlotForm(props) {
   const sendFormDetailsEmail = async () => {
     try {
       const response = await axios.post(
-        `${REACT_APP_API_BASE_URL}/sendFormDetailsEmail`,
+        `/sendFormDetailsEmail`,
         {
           name: studentName,
           email: studentEmail,
