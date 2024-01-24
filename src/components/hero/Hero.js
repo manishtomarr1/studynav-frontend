@@ -2,14 +2,14 @@ import { useState } from "react";
 import { FaCalendarAlt, FaCheckCircle, FaEnvelope } from "react-icons/fa";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 // import { RxDotFilled } from "react-icons/rx";
 import picture from "./assets/pic.JPG";
 import HelpField from "../home/HelpField/HelpField";
 
 const Hero = () => {
-  const { setAuth } = useAuth();
+  // const { setAuth } = useAuth();
   const images = [
     {
       url: "https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg?auto=compress&cs=tinysrgb&w=600",
