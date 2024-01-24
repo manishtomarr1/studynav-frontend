@@ -1,4 +1,4 @@
-/* global jwt */
+
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -6,7 +6,6 @@ import { RingLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../../context/AuthContext'; // Adjust the import path accordingly
 import "./Login.css";
-// import jwt from 'jsonwebtoken';
 
 
 const Login = ({ onAuthentication }) => {
