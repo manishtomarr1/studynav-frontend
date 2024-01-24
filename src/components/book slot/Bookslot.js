@@ -8,6 +8,7 @@ import { Badge } from "antd";
 import { FaArrowLeft } from "react-icons/fa";
 import SlotForm from "./form/SlotForm";
 import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,54 +19,62 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function BookSlot() {
-  const [showForm, setShowForm] = React.useState(false); // State to control form visibility
-  const [slots, setSlots] = React.useState([]); // State to store slots fetched from backend
+  const [showForm, setShowForm] = React.useState(false);
+  const [slots, setSlots] = React.useState([]);
   const [selectedSlotId, setSelectedSlotId] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
+  const [loadTime, setLoadTime] = React.useState(0);
 
   React.useEffect(() => {
-    fetchSlots(); // Fetch slots from the backend
+    fetchSlots();
   }, []);
 
   const fetchSlots = async () => {
+    setLoading(true);
+    setLoadTime(0);
+    const loadTimer = setInterval(() => {
+      setLoadTime((prevTime) => prevTime + 1);
+    }, 1000);
+
     try {
       const response = await axios.get("/fatchSlot");
-      const slotData = response.data; // Use response.data directly
-      // console.log(response[0].data.booked)
+      const slotData = response.data;
       setSlots(slotData);
-      // console.log(slots);
     } catch (error) {
       console.error("Error fetching slots:", error);
+    } finally {
+      setLoading(false);
+      clearInterval(loadTimer);
     }
   };
 
   const handleBookButtonClick = (slotId) => {
-    // Step 2: Update the selected slot ID
     setSelectedSlotId(slotId);
     setShowForm(true);
   };
 
   const handleBackButtonClick = () => {
-    setSelectedSlotId(null); // Reset the selected slot ID when going back
+    setSelectedSlotId(null);
     setShowForm(false);
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        {showForm ? (
+        {loading ? (
+          <Grid item xs={12} style={{ textAlign: "center", marginTop: "20px" }}>
+            <CircularProgress />
+            {loadTime > 30 && <p>Loading is taking longer than usual...</p>}
+          </Grid>
+        ) : showForm ? (
           <Grid item xs={12}>
             <div className="px-4 md:px-0">
-              {" "}
-              {/* Apply padding on mobile screens */}
               <div className="max-w-lg mx-auto pl-20 pr-20">
-                {" "}
-                {/* Center and add padding */}
                 <SlotForm slotId={selectedSlotId} />
                 <div className="mt-4">
                   <Button
                     onClick={handleBackButtonClick}
                     startIcon={<FaArrowLeft />}
-                    // className="text-gray-800"
                   >
                     Back
                   </Button>
@@ -73,7 +82,7 @@ export default function BookSlot() {
               </div>
             </div>
           </Grid>
-        ) : (
+        ) : slots.length > 0 ? (
           slots.map((slot) => (
             <Grid key={slot._id} item xs={12} sm={6} md={4}>
               <Item
@@ -94,14 +103,8 @@ export default function BookSlot() {
                   {new Date(slot.date).toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
-                    hour12: true, // Display in 12-hour format
+                    hour12: true,
                   })}
-                  <br />
-                  {/* Your Local Time:{" "}
-                  {new Date(slot.date).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })} */}
                   <p className="font-bold">time is according to the UK</p>
                 </div>
 
@@ -116,9 +119,7 @@ export default function BookSlot() {
                   color={slot.pending ? "cyan" : slot.booked ? "pink" : "green"}
                   className="-top-28"
                   style={
-                    window.innerWidth < 640 // Check if the screen width is less than 640px (xs screen size)
-                      ? { marginRight: "180px" } // Add margin for xs screen size
-                      : {} // No margin for larger screens
+                    window.innerWidth < 640 ? { marginRight: "180px" } : {}
                   }
                 />
 
@@ -140,6 +141,14 @@ export default function BookSlot() {
               </Item>
             </Grid>
           ))
+        ) : (
+          <Grid item xs={12} style={{ textAlign: "center", marginTop: "20px" }}>
+            <p>
+              No events now. Please wait for Manish to add an event. If you have
+              an emergency, contact Manish on LinkedIn or Instagram from the
+              contact section on the homepage.
+            </p>
+          </Grid>
         )}
       </Grid>
     </Box>

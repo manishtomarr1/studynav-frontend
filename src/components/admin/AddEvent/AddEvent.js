@@ -3,29 +3,36 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 
 const AddEvent = ({ onEventAdded }) => {
   const navigate = useNavigate();
-
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const { authToken } = useAuth(); // Assuming authToken is stored in your context
 
   const handleAddEvent = async () => {
+  console.log(authToken)
     try {
       const response = await axios.post("/addSlot", {
         date: selectedDateTime,
         booked: false,
+      }, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,  // Include "Bearer" before the token
+        },
       });
-
+  
       const newSlot = response.data;
-
+  
       onEventAdded(newSlot);
-
+  
       setSelectedDateTime(new Date());
       setSuccessMessage("Event added successfully!");
       setErrorMessage("");
-
+  
       setTimeout(() => {
         setSuccessMessage("");
       }, 5000); // Clear success message after 5 seconds
@@ -33,17 +40,20 @@ const AddEvent = ({ onEventAdded }) => {
       console.error("Error adding slot:", error);
       setErrorMessage("An error occurred while adding the event.");
       setSuccessMessage("");
-
+  
       setTimeout(() => {
         setErrorMessage("");
       }, 5000); // Clear error message after 5 seconds
     }
   };
+
   const handleLogout = () => {
     localStorage.removeItem("authToken");
-    localStorage.removeItem("auth");
 
-    navigate(`/${process.env.REACT_APP_PATHCODE}/adminLogin`);
+    // Call the logout function from the AuthContext
+    logout();
+
+    navigate('/');
   };
 
   return (
