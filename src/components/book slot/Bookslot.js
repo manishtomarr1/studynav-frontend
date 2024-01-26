@@ -142,13 +142,13 @@ export default function BookSlot() {
             </Grid>
           ))
         ) : (
-          <div className="text-center mt-5 mx-4 md:mx-auto md:max-w-4xl lg:max-w-5xl px-2">
+          <Grid item xs={12} style={{ textAlign: "center", marginTop: "20px" }}>
             <p>
               No events now. Please wait for Manish to add an event. If you have
               an emergency, contact Manish on LinkedIn or Instagram from the
               contact section on the homepage.
             </p>
-          </div>
+          </Grid>
         )}
       </Grid>
     </Box>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { REACT_APP_API_BASE_URL } from "../../../config";
 import { useForm, ValidationError } from "@formspree/react";
+import { FaInstagramSquare } from "react-icons/fa";
 
 function SlotForm(props) {
   const [studentName, setStudentName] = useState("");
